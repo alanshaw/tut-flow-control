@@ -7,7 +7,12 @@ module.exports = function (tasks, cb) {
     var task = tasks[taskName]
 
     task(function (er, taskResult) {
-      if (er && !errd) {
+      if (errd) {
+        return
+      }
+      
+      if (er) {
+        errd = true
         return cb(er)
       }
 
